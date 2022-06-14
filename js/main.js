@@ -1,34 +1,47 @@
-toDoList = [
-  {
-    text: "Elemento 1",
-    done: false,
-  },
-  {
-    text: "Elemento 2",
-    done: true,
-  },
-  {
-    text: "Elemento 3",
-    done: false,
-  },
-  {
-    text: "Elemento 4",
-    done: false,
-  },
-];
-
 const appVue = new Vue({
   el: "#app",
 
   data: {
-    list: toDoList,
+    toDoList: [
+      {
+        text: "Elemento 1",
+        done: false,
+      },
+      {
+        text: "Elemento 2",
+        done: true,
+      },
+      {
+        text: "Elemento 3",
+        done: false,
+      },
+      {
+        text: "Elemento 4",
+        done: false,
+      },
+    ],
+    newTaskText: "",
+    deletingIndex: null,
   },
 
   methods: {
-    cancelElement: function () {
-      let index = this.list.indexOf(this.element);
-      console.log(index);
-      this.list.splice(this.element[index]);
+    cancelElement() {
+      this.toDoList.splice(this.deletingIndex, 1)
+    },
+
+    addToDo() {
+      const nuovoTask = this.newTaskText.trim();
+
+      if (nuovoTask === "") {
+        return;
+      }
+
+      this.toDoList.push({
+        text: nuovoTask,
+        done: false,
+      });
+
+      this.newTaskText = "";
     },
   },
 });

@@ -26,10 +26,28 @@
         </div>
         <div>
           <ul>
-            <li id="element" v-for="element in list" :class="{'active': element.done == true}">
-              {{element.text}}<i class="fa-solid fa-xmark ms-4 p-2" @click="cancelElement"></i>
+            <li
+              v-for="(element, i) in toDoList"
+              :class="{'active': element.done == true}"
+            >
+              {{element.text}}<i
+                class="fa-solid fa-xmark ms-4 p-2"
+                @click="cancelElement(i)"
+              ></i>
             </li>
           </ul>
+        </div>
+        <div class="mb-3 input-group">
+          <input
+            type="text"
+            class="form-control"
+            v-model="newTaskText"
+            @keyup.enter="addToDo()"
+            placeholder="Inserisci nuova task"
+          />
+          <button class="btn btn-outline-success" @click="addToDo()">
+            Aggiungi
+          </button>
         </div>
       </div>
     </div>
